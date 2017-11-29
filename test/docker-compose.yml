@@ -12,3 +12,5 @@ services:
       - "8080:8080"
     links:
       - "redis:redis.local"
+    volumes:
+      - /tmp:/var/log/

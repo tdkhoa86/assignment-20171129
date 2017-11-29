@@ -1,0 +1,92 @@
+---
+  - hosts: Kixeye-server
+    tasks:
+    
+
+# Install essential prequisites tools for setting environments
+      - name: Install dependencies package
+        yum: state=present   name={{ item }}
+
+        with_items:
+          - lsof
+          - telnet
+          - firewalld
+          - cifs-utils
+          - wget
+          - yum-utils
+          - device-mapper-persistent-data
+          - lvm2
+          - zip
+          - unzip
+          - libselinux-python
+          - libsemanage-python
+          - vim
+
+# Install docker engine with specific version of docker 
+        
+          
+      - name: Add docker repo     
+        command: yum-config-manager --add-repo  https://download.docker.com/linux/centos/docker-ce.repo
+        
+      - name: Install docker CE 17.09.0.ce on Centos 7
+        yum: 
+          name: docker-ce-17.09.0.ce
+          state: present
+          
+      - name:
+        service:
+          name: docker
+          state: started
+
+       # Install docker-compose
+      - name: Add docker repo     
+        command: sudo curl -L https://github.com/docker/compose/releases/download/1.17.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+        
+      - name : Grant executable permisison
+        command: sudo chmod +x /usr/local/bin/docker-compose
+          
+          
+# Open firewall ports for webserver port 8080
+      - name:
+        service:
+          name: firewalld
+          state: started
+     
+      - firewalld:
+          port: 8080/tcp
+          permanent: true
+          state: enabled          
+          
+
+# Initialize swarm cluster on single node
+      - name: init docker swarm  
+        command: docker swarm init 
+
+# Start web server (update the file localtion if any)
+      - name: start webserver by docker compose
+        command: docker-compose up -f ../test/docker-compose.yml  
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
