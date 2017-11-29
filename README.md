@@ -1,7 +1,7 @@
 # Assignment
 
-Scope
-Assume web server will be built & deployed on CentOS 7
+Scope: 
+Assume web server will be built & deployed on CentOS 7; 
 Docker swarm on single node
 
 
