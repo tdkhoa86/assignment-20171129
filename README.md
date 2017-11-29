@@ -1,7 +1,9 @@
 # Assignment
 
 Scope: 
+
 Assume web server will be built & deployed on CentOS 7; 
+
 Docker swarm on single node
 
 
@@ -17,6 +19,7 @@ Open file /etc/ansible/hosts
 Add new lines at bottom:
 
 [Kixeye-server]
+
 localhost ansible_connection=local
 
 
