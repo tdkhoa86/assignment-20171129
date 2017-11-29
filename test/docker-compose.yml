@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  redis:
+    image: redis-test
+    build: ./redis
+
+  web:
+    image: testapp
+    build: ./testapp
+    ports:
+      - "8080:8080"
+    links:
+      - "redis:redis.local"

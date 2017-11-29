@@ -1,0 +1,15 @@
+FROM openjdk
+
+MAINTAINER khoa.trandang@outlook.com
+
+VOLUME /tmp
+
+ENV LD_LIBRARY_PATH /usr/lib64/runtime_lib64
+
+ENV PATH $PATH:/usr/lib64/runtime_lib64
+
+ADD *.jar testapp.jar
+
+RUN touch /testapp.jar
+       
+ENTRYPOINT ["java","-Xms256m","-Xmx1024m","-cp","/testapp.jar", "kixeye.testapp.Main"]
