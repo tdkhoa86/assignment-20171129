@@ -1,13 +1,13 @@
 ## Build with docker file
-docker build --no-cache=true -t apa-registry:5000/testapp  testapp/.
-docker build --no-cache=true -t apa-registry:5000/redis-test  redis/.
+docker build --no-cache=true -t testapp  testapp/.
+docker build --no-cache=true -t redis-test  redis/.
 
 ##Test with docker run 
 
-docker run -d --name testapp apa-registry:5000/testapp
+docker run -d --name testapp testapp
 
-docker service create -p 9191:8080 --name testapp --network uic-swarm-net --host redis.local:172.17.0.5 apa-registry:5000/testapp
+docker service create -p 9191:8080 --name testapp --network uic-swarm-net --host redis.local:172.17.0.5 testapp
 
 
-docker run -d --name redis apa-registry:5000/redis-test
-docker service create --name redis --endpoint-mode dnsrr  --hostname redis.local --network uic-swarm-net apa-registry:5000/redis-test
+docker run -d --name redis redis-test
+docker service create --name redis --endpoint-mode dnsrr  --hostname redis.local --network uic-swarm-net redis-test
