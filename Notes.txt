@@ -9,5 +9,7 @@ docker run -d --name testapp testapp
 docker service create -p 9191:8080 --name testapp --network uic-swarm-net --host redis.local:172.17.0.5 testapp
 
 
+#Hello
+
 docker run -d --name redis redis-test
 docker service create --name redis --endpoint-mode dnsrr  --hostname redis.local --network uic-swarm-net redis-test
